@@ -1,6 +1,7 @@
 datasets/
 .vscode/
 models/checkpoints/
+!models/checkpoints/cGAN_model.h5
 __pycache__
 .ipynb_checkpoints
 segmentation/
