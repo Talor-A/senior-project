@@ -21,6 +21,7 @@ y_shape = 512
 fixed_seed_num = 1234
 np.random.seed(fixed_seed_num)
 tf.set_random_seed(fixed_seed_num)
+bw_threshold = 128
 
 # constants
 dataset = '../datasets/train/' 
@@ -68,6 +69,7 @@ for i, image in enumerate(os.listdir(dataset)[:samples]):
     I = cv2.imread(dataset+image)
     I = cv2.resize(I, (x_shape, y_shape))
     J = cv2.cvtColor(I, cv2.COLOR_BGR2GRAY)
+    J = cv2.threshold(J, bw_threshold, 255, cv2.THRESH_BINARY)[1]
     J = J.reshape(J.shape[0], J.shape[1], 1)
     rgb[i] = I; gray[i] = J
 
@@ -76,6 +78,7 @@ for i, image in enumerate(os.listdir(val_data)[:val_samples]):
     I = cv2.imread(val_data+image)
     I = cv2.resize(I, (x_shape, y_shape))
     J = cv2.cvtColor(I, cv2.COLOR_BGR2GRAY)
+    J = cv2.threshold(J, bw_threshold, 255, cv2.THRESH_BINARY)[1]
     J = J.reshape(J.shape[0], J.shape[1], 1)
     rgb_val[i] = I; gray_val[i] = J
 
